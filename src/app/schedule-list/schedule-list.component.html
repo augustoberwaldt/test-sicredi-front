@@ -1,0 +1,32 @@
+<br />
+<div class="row">
+  <div class="col-md-4 offset-md-11">
+    <app-modal> </app-modal>
+  </div>
+</div>
+<br />
+<table datatable class="table row-border hover" *ngIf="this.temp_var">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Titulo</th>
+      <th>Data de Criação</th>
+      <th>Data de Termino</th>
+      <th>Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ret of this.data">
+      <td>{{ ret.id }}</td>
+      <td>{{ ret.title }}</td>
+      <td>{{ ret.dtCreated | date: 'dd/MM/yyyy h:mm:ss' }}</td>
+      <td>{{ ret.dtFinish | date: 'dd/MM/yyyy  h:mm:ss' }}</td>
+      <td>
+        <a routerLink="/home">
+          <app-vote-modal> </app-vote-modal> nbsp; nbsp;
+          <app-session-modal> </app-session-modal
+        ></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
