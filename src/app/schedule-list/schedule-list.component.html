@@ -10,8 +10,8 @@
     <tr>
       <th>Id</th>
       <th>Titulo</th>
-      <th>Data de Criação</th>
-      <th>Data de Termino</th>
+      <th>Inicio da Sessão</th>
+      <th>Termino da Sessão</th>
       <th>Ação</th>
     </tr>
   </thead>
@@ -19,13 +19,16 @@
     <tr *ngFor="let ret of this.data">
       <td>{{ ret.id }}</td>
       <td>{{ ret.title }}</td>
-      <td>{{ ret.dtCreated | date: 'dd/MM/yyyy h:mm:ss' }}</td>
+      <td>{{ ret.dtStarted | date: 'dd/MM/yyyy h:mm:ss' }}</td>
       <td>{{ ret.dtFinish | date: 'dd/MM/yyyy  h:mm:ss' }}</td>
       <td>
-        <a routerLink="/home">
-          <app-vote-modal> </app-vote-modal> nbsp; nbsp;
-          <app-session-modal> </app-session-modal
-        ></a>
+        <span *ngIf="!ret.dtFinish && ret.time">
+          <app-vote-modal [schedule]="ret.id"> </app-vote-modal>
+        </span>
+        &nbsp; &nbsp;
+        <span *ngIf="!ret.dtStarted">
+          <app-session-modal [schedule]="ret.id"> </app-session-modal>
+        </span>
       </td>
     </tr>
   </tbody>
