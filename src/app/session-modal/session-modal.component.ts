@@ -3,7 +3,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 
-const URL = 'http://localhost:8080/v1/schedule/updateSchedule';
+const URL = 'http://localhost:8080/v1/';
 
 @Component({
   selector: 'app-session-modal',
@@ -27,44 +27,52 @@ export class SessionModalComponent {
         let timeend_split = this.timeend.split(':');
         let timestart_split = this.timestart.split(':');
         console.log('timestart_split', timestart_split);
-
+        console.log('timeend_split', timeend_split);
         let timestartcalc = +timestart_split[0] * 60;
         timestartcalc = timestartcalc + +timestart_split[1];
         let timeendcalc = +timeend_split[0] * 60;
         timeendcalc = timeendcalc + +timeend_split[1];
 
         let sumtime = Math.abs(+timestartcalc - +timeendcalc);
-
+        console.log('timeend_split', sumtime);
+        var data = {
+          schedule: this.schedule,
+          time: sumtime,
+          timeend: timestartcalc,
+          timestart: timestartcalc,
+          dtFinish: false
+        };
         this.http
-          .put(URL, {
-            schedule: this.schedule,
-            time: sumtime,
-            timeend: timestartcalc,
-            timestart: timestartcalc,
-            dtFinish: false
-          })
+          .put(URL + 'schedule/updateSchedule', data)
           .subscribe((res: Response) => {
             console.log('res', res);
             if (String(res.status) == 'success') {
               alert('Sessão Iniciada com Sucesso !');
               var clearI = setInterval(() => {
-                this.http
-                  .put(URL, {
-                    schedule: this.schedule,
-                    time: sumtime,
-                    timeend: timestartcalc,
-                    timestart: timestartcalc,
-                    dtFinish: true
-                  })
-                  .subscribe(() => {
-                    clearInterval(clearI);
-                  });
-              }, sumtime * 60000);
+                console.log('dentro do timer', this.schedule);
+                this.sendUpdate(data, clearI);
+              }, data.time * 6000);
+              // pasa para milesegundos
               window.location.reload();
             } else {
-              //   alert(String(res.msg));
+              // debbuger
+              //  alert(String(res.msg));
             }
           });
+      });
+  }
+
+  sendUpdate(data, clear) {
+    this.http
+      .put(URL + 'schedule/updateSchedule', {
+        schedule: data.schedule,
+        time: data.time,
+        timeend: data.timeend,
+        timestart: data.timestart,
+        dtFinish: true
+      })
+      .subscribe(() => {
+        clearInterval(clear);
       });
   }
 }

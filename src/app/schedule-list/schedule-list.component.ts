@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 import { CommonModule } from '@angular/common';
+const URL = 'http://localhost:8080/v1/';
 @Component({
   selector: 'app-schedule-list',
   templateUrl: './schedule-list.component.html',
@@ -21,7 +22,7 @@ export class ScheduleListComponent implements OnInit {
     let headers = new HttpHeaders();
     //   headers.set('Accept-Language', 'en-US');
     this.http
-      .get('http://localhost:8080/v1/schedule/getSchedules', {
+      .get(URL + 'schedule/getSchedules', {
         headers: headers
       })
       .subscribe((res: Response) => {
