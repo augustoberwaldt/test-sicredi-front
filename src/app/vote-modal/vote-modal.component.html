@@ -1,6 +1,6 @@
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Nova Pauta</h4>
+    <h4 class="modal-title" id="modal-basic-title">Votação</h4>
     <button
       type="button"
       class="close"
@@ -13,26 +13,22 @@
   <div class="modal-body">
     <form>
       <div class="form-group">
-        <label for="exampleInputEmail1">Titulo</label>
+        <label for="cpf">Cpf</label>
         <input
           type="text"
           class="form-control"
-          id="title"
-          placeholder="Titulo"
-          [(ngModel)]="title"
-          name="title"
+          id="cpf"
+          placeholder="CPF"
+          [(ngModel)]="cpf"
+          name="cpf"
         />
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Descrição</label>
-        <textarea
-          class="form-control"
-          id="description"
-          name="description"
-          [(ngModel)]="description"
-          rows="3"
-          placeholder="Descrição"
-        ></textarea>
+        <label for="sel1">Opção do Voto</label>
+        <select class="form-control" name="voto" id="voto" [(ngModel)]="voto">
+          <option value="SIM">SIM</option>
+          <option value="NAO">NÂO</option>
+        </select>
       </div>
     </form>
   </div>
@@ -42,11 +38,11 @@
       class="btn btn-outline-dark"
       (click)="modal.close('Save click')"
     >
-      Cadastrar
+      Votar
     </button>
   </div>
 </ng-template>
 
 <button class="btn btn-lg btn-outline-primary" (click)="open(content)">
-  Iniciar Sessão
+  Votar
 </button>

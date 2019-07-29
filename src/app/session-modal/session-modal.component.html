@@ -1,6 +1,6 @@
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Nova Pauta</h4>
+    <h4 class="modal-title" id="modal-basic-title">Iniciar Sessão</h4>
     <button
       type="button"
       class="close"
@@ -13,26 +13,22 @@
   <div class="modal-body">
     <form>
       <div class="form-group">
-        <label for="exampleInputEmail1">Titulo</label>
+        <label for="sessionstart">Inicio da Sessão</label>
         <input
-          type="text"
+          [(ngModel)]="timestart"
+          type="time"
+          name="timestart"
           class="form-control"
-          id="title"
-          placeholder="Titulo"
-          [(ngModel)]="title"
-          name="title"
         />
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Descrição</label>
-        <textarea
+        <label for="sessionend">Fim da Sessão</label>
+        <input
+          [(ngModel)]="timeend"
+          type="time"
           class="form-control"
-          id="description"
-          name="description"
-          [(ngModel)]="description"
-          rows="3"
-          placeholder="Descrição"
-        ></textarea>
+          name="timeend"
+        />
       </div>
     </form>
   </div>
@@ -48,5 +44,5 @@
 </ng-template>
 
 <button class="btn btn-lg btn-outline-primary" (click)="open(content)">
-  Votar
+  Iniciar Sessão
 </button>
