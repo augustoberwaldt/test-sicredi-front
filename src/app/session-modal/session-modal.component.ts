@@ -36,7 +36,7 @@ export class SessionModalComponent {
         let sumtime = Math.abs(+timestartcalc - +timeendcalc);
         console.log('timeend_split', sumtime);
         var data = {
-          schedule: this.schedule,
+          id: this.schedule,
           time: sumtime,
           timeend: timestartcalc,
           timestart: timestartcalc,
@@ -65,7 +65,7 @@ export class SessionModalComponent {
   sendUpdate(data, clear) {
     this.http
       .put(URL + 'schedule/updateSchedule', {
-        schedule: data.schedule,
+        id: data.schedule,
         time: data.time,
         timeend: data.timeend,
         timestart: data.timestart,
