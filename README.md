@@ -1,6 +1,6 @@
-# Softdesign
+# SICREDI
 
-Front end do teste realizado.
+Front end do teste realizado para cadastro de pautas e votação.
 
 #### Considerações
 
